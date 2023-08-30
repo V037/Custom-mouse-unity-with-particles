@@ -8,7 +8,7 @@ public class sussy : MonoBehaviour
     [SerializeField] private GameObject ob1;
     [SerializeField] private GameObject ob2;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Transform m_RectTransform;
+    [SerializeField] private Transform mousepos;
 
     [SerializeField] private int countt = 0;
     [SerializeField] private GameObject[] precount = new GameObject[60];
@@ -29,7 +29,7 @@ public class sussy : MonoBehaviour
             {
                 countt++;
             }
-            precount[countt] = Instantiate(prefab, m_RectTransform.position, Quaternion.identity);
+            precount[countt] = Instantiate(prefab, mousepos.position, Quaternion.identity);
             ic[countt] = Time.time;
             //StartCoroutine(exxe(countt));
             countt = 0;
@@ -60,18 +60,18 @@ public class sussy : MonoBehaviour
             }
         }
 
-        m_RectTransform.position = Input.mousePosition;  
+        mousepos.position = Input.mousePosition;  
     }
 
     void exxeee(int i, float drool)
     {
-        precount[i] = Instantiate(prefab, m_RectTransform.position, Quaternion.identity);
+        precount[i] = Instantiate(prefab, mousepos.position, Quaternion.identity);
         
     }
 
     IEnumerator exxe(int i)
     {
-        precount[i] = Instantiate(prefab, m_RectTransform.position, Quaternion.identity);
+        precount[i] = Instantiate(prefab, mousepos.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
         Destroy(precount[i]);
         yield return 0;
