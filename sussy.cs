@@ -9,8 +9,8 @@ public class sussy : MonoBehaviour
     [SerializeField] private GameObject ob1;
     [SerializeField] private GameObject ob2;
     [SerializeField] private GameObject prefab;
-    private GameObject[] precount = new GameObject[120];
-    private float[] ic = new float[120];
+    private GameObject[] precount = new GameObject[180];
+    private float[] ic = new float[180];
 
     [SerializeField] private Transform m_RectTransform;
     [SerializeField] private int countt = 0;
@@ -18,7 +18,11 @@ public class sussy : MonoBehaviour
     RaycastHit hit;
     Ray ray;
     
-
+    void Awake()
+    {
+        precount = new GameObject[180];
+        ic = new float[180];
+    }
     void Start()
     {   
         Cursor.visible = false;
@@ -56,7 +60,7 @@ public class sussy : MonoBehaviour
         {
             if(ic[i] != 0)
             {
-                if(ic[i]-Time.time <= -5)
+                if(ic[i]-Time.time <= -3)
                 {
                     Destroy(precount[i]);
                 }  
