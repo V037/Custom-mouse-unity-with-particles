@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class sussy : MonoBehaviour
 {
+    [SerializeField] private Camera cam;
     [SerializeField] private GameObject ob1;
     [SerializeField] private GameObject ob2;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Transform mousepos;
+    private GameObject[] precount = new GameObject[120];
+    private float[] ic = new float[120];
 
+    [SerializeField] private Transform m_RectTransform;
     [SerializeField] private int countt = 0;
-    [SerializeField] private GameObject[] precount = new GameObject[60];
-    [SerializeField] private float[] ic = new float[60];
+
+    RaycastHit hit;
+    Ray ray;
     
 
     void Start()
@@ -29,9 +33,8 @@ public class sussy : MonoBehaviour
             {
                 countt++;
             }
-            precount[countt] = Instantiate(prefab, mousepos.position, Quaternion.identity);
+            precount[countt] = Instantiate(prefab, m_RectTransform.position, Quaternion.identity);
             ic[countt] = Time.time;
-            //StartCoroutine(exxe(countt));
             countt = 0;
         }
     }
@@ -60,20 +63,10 @@ public class sussy : MonoBehaviour
             }
         }
 
-        mousepos.position = Input.mousePosition;  
-    }
-
-    void exxeee(int i, float drool)
-    {
-        precount[i] = Instantiate(prefab, mousepos.position, Quaternion.identity);
-        
-    }
-
-    IEnumerator exxe(int i)
-    {
-        precount[i] = Instantiate(prefab, mousepos.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(precount[i]);
-        yield return 0;
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            m_RectTransform.transform.position = hit.point;
+        }
     }
 }
